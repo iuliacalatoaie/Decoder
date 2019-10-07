@@ -1,0 +1,92 @@
+Calatoaie Iulia-Adriana
+325CA
+
+Task1
+-> xor_strings:
+-am preluat de pe stiva parametrii functiei, respectiv cheie si valoare
+-am pastrat in edi adresa de inceput a valorii(sirului) si in esi a cheii
+-am facut xor pe fiecare byte si am suprascris sirul pana am ajuns la
+terminatorul de sir
+
+->task1:
+-sunt apelate functia ce imi intoarce adresa de inceput a cheii, functia 
+xor_strings si cea de afisare a cheii
+
+Task2
+->rolling_xor:
+-am pastrat in edi si esi adresa sirului, pentru ca voi parcurge sirul de la
+coada la cap pentru a nu pierde informatia
+-parcurg cu edi sirul o data pentru a putea face asta si fac xor pe elementul
+curent cu cel anterior
+-il suprascriu pe cel curent si trec mai departe pana ajung la primul element
+
+->task2:
+-sunt apelate functia rolling_xor si cea de afisare
+
+Task3
+->xor_hex_string:
+-am pastrat in edi adresa valorii(sirului) si in esi a cheii
+-voi transforma in format decimal(oricum in spate valorile pe care se face xor
+sunt binare) pentru a avea formatul corect(de ex. 0 sa fie 0, nu 48, valoarea
+in ascii)
+-daca valoarea e mai mare ca 9, trebuie sa scad iar 39(97 - 48 - 39 = 10), 
+altfel pur si simplu continui, pentru c ami-am format bine numarul
+-pentru ca am cate jumatate de byte per caracter, voi lua cate doua caractere
+cu care voi forma un nou numar corect in decimal
+-astfel primul caracter trebuie facut decimal, shiftat cu 4 pozitii (este 
+partea high a numarului) si la el adunata "cealalata jumatate" (partea low)
+-astfel voi avea un caracter mereu in plus pe care trebuie sa il suprasciu cu
+urmatoarea pereche
+-operatiile descrise mai sus sunt valabile atat pentru cheie cat si pentru 
+valoare
+-dupa ce le-am realizat voi face xor pe aceste valori si voi suprascrie sirul
+dat de input
+
+->task3:
+-sunt apelate functia ce imi intoarce adresa de inceput a cheii, functia
+xor_hex_string
+
+Task5
+->bruteforce_singlebyte_xor:
+-in esi am adresa valorii
+-in al voi avea -1 la inceput pentru ca la pasul urmator am nevoie de o
+incrementare, aceasta este cheia cu care voi face bruteforce
+-in edi o sa mut prima dresa a stringului dupa ce fac xor pe el cu cheia
+in cazul in care nu am gasit cheia buna
+-dupa ce fac xor cu o cheie, pur si simplu caut primul caracter f ce apare in 
+sir, atunci cand il gasesc caut "in cascada" urmatoarele litere a cuvantului 
+force
+-la fiecare incremenetare a lui edi voi verifica faptul ca nu am ajuns la
+terminatorul de sir (daca am ajuns inainte sa gasesc cuvantul inseama ca nu am
+gasit cheia buna)
+-daca nu am gasit ceea ce cautam, atunci mai fac xor o data cu cheia, pentru a
+reveni la sirul original de decriptat
+-daca am gasit cheia, o pun pe stiva
+
+->task5:
+-sunt apelate functiile bruteforce_singlebyte_xor si cea de afisare a
+stringului; am decis asa las eax, valoarea intoarsa de functie pe stiva 
+deoarece functiile apelate in prealabil "strica" registrul eax
+
+Task6
+->decode_vigenere:
+-in edi pastrez valoarea si in esi pastrez cheia
+-vrific daca caracterul din sir este o litera mica a alfabetului, daca este
+continui algoritmul, daca nu, o sa merg la caracterul urmator fara a face 
+altceva
+-o sa scad din valoarea cheii valoarea lui a pentru a vedea cu cat a fost
+rotit la criptare caracterul curent din linie, din 26(cat are alfabetul) scad
+valoarea gasita pentru a roti cu complementul sau la decriptare
+-dupa ce am facut rotatia, suprascriu caracterul, incrementez cheia, verific
+daca in cadrul cheii nu cumva am ajuns la finalul cheii; daca am ajuns la
+finalul cheii mut in esi adresa de inceput a acestuia
+-incrementez edi si verific sa nu fi ajuns la terminatorul de sir
+-algoritmul se continua sau se termina in functie de asta
+
+-task6:
+-sunt apelate functiile strlen, decode_vigenere si cea de afisare a sirului
+
+Functia find_key_address:
+-primeste ca parametru sirul si intoarce in edi adresa de inceput a cheii
+-merge pana ajunge la terminatorul de sir al sirului si mai incrementeaza o
+data pentru a fi la cel al cheii
